@@ -1,16 +1,19 @@
-const canvasSize = 400;
+var canvasSize = 400;
 
-const minRadius = 10;
-const rejectAttempts = 30;
+var minRadius = 10;
+var rejectAttempts = 30;
 
-const sampleSize = minRadius / Math.sqrt(2);
+var sampleSize = minRadius / Math.sqrt(2);
 
-const gridSize = Math.floor(canvasSize / sampleSize);
+var gridSize = Math.floor(canvasSize / sampleSize);
 
 var grid = [];
 var activeList = [];
 
 var canvasCtx;
+
+var updateFuncHandle;
+
 
 class Vector2D {
     constructor(_x, _y) {
@@ -34,9 +37,63 @@ function distVector2D(v1, v2) {
 
 function random(min, max) {
     return Math.random() * (max - min) + min;
-  }
+}
 
-function draw() {
+function setup() {
+    createCanvas(canvasSize);
+
+    document.getElementById('sizeSlider').value = canvasSize;
+    document.getElementById('radiusSlider').value = minRadius;
+    document.getElementById('attemptsSlider').value = rejectAttempts;
+}
+
+function startPSD() {
+    for(var i = 0; i < gridSize * gridSize; ++i)
+        grid[i] = undefined;
+
+    activeList = [];
+
+    const randomX = random(0, canvasSize);
+    const randomY = random(0, canvasSize);
+
+    grid[0] = new Vector2D(randomX, randomY);
+    activeList.push(grid[0]);
+
+    startUpdate();
+}
+
+function createCanvas(size) {
+    var canvas = document.getElementById('mainCanvas');
+    canvas.width = size;
+    canvas.height = size;
+
+    canvasCtx = canvas.getContext('2d');
+
+    canvasCtx.fillStyle = 'black';
+    canvasCtx.fillRect(0, 0, size, size);
+}
+
+function startUpdate() {
+    updateFuncHandle = window.setInterval(draw, 16);
+
+    document.getElementById('genButton').disabled = true;
+    document.getElementById('clearButton').disabled = false;
+    document.getElementById('sizeSlider').disabled = true;
+    document.getElementById('radiusSlider').disabled = true;
+    document.getElementById('attemptsSlider').disabled = true;
+}
+
+function stopUpdate() {
+    clearInterval(updateFuncHandle);
+
+    document.getElementById('genButton').disabled = false;
+    document.getElementById('clearButton').disabled = true;
+    document.getElementById('sizeSlider').disabled = false;
+    document.getElementById('radiusSlider').disabled = false;
+    document.getElementById('attemptsSlider').disabled = false;
+}
+
+function updatePSD() {
     if(activeList.length > 0) {
         var randId = Math.floor(random(0, activeList.length));
         var sample = activeList[randId];
@@ -91,6 +148,12 @@ function draw() {
         if(!found)
             activeList.splice(randId, 1);
     }
+    else
+        stopUpdate();
+}
+
+function draw() {
+    updatePSD();
 
     canvasCtx.fillStyle = 'black';
     canvasCtx.fillRect(0, 0, canvasSize, canvasSize);
@@ -107,27 +170,37 @@ function draw() {
         if(activeList[i].x < 0)
             console.log("more");
 
-        canvasCtx.fillStyle = 'orange';
+        canvasCtx.fillStyle = 'blue';
         canvasCtx.fillRect(activeList[i].x, activeList[i].y, sampleSize, sampleSize);
     }
 }
 
-function setup() {
-    for(var i = 0; i < gridSize * gridSize; ++i)
-        grid[i] = undefined;
+function updateValues() {
+    var sizeValue = parseInt(document.getElementById('sizeSlider').value);
+    var radiusValue = parseInt(document.getElementById('radiusSlider').value);
+    var attemptsValue = parseInt(document.getElementById('attemptsSlider').value);
 
-    const randomX = random(0, canvasSize);
-    const randomY = random(0, canvasSize);
+    createCanvas(sizeValue);
 
-    grid[0] = new Vector2D(randomX, randomY);
-    activeList.push(grid[0]);
+    canvasSize = sizeValue;
 
+    minRadius = radiusValue;
+    rejectAttempts = attemptsValue;
 
-    var canvas = document.getElementById('mainCanvas');
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
+    sampleSize = minRadius / Math.sqrt(2);
 
-    canvasCtx = canvas.getContext('2d');
+    gridSize = Math.floor(canvasSize / sampleSize);
+}
 
-    window.setInterval(draw, 16);
+function OnGenButtonClick() {
+    updateValues();
+
+    startPSD();
+}
+
+function OnClearButtonClick() {
+    canvasCtx.fillStyle = 'black';
+    canvasCtx.fillRect(0, 0, canvasSize, canvasSize);
+
+    stopUpdate();
 }

@@ -1,0 +1,78 @@
+:root {
+    --top-space: 2vh;
+    --v-space: 5vh;
+}
+
+body {
+    background-color: #325273;
+}
+
+.labelText {
+    font-size: 1.9vh;
+    color:#ededed;
+    
+}
+
+.button {
+    font-size: 2.2vh;
+    background-color: #446b96;
+    border: none;
+    color: #ededed;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:disabled{
+    font-size: 2.2vh;
+    background-color: #656d75;
+    border: none;
+    color: #8e959c;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover{
+    font-size: 2.2vh;
+    background-color: #4576ad;
+    border: none;
+    color: #ededed;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#mainDiv {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+#menuDiv {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    position:fixed; 
+    left:45vh;
+}
+
+#sizeDiv {
+    position:fixed; 
+    top: var(--top-space);
+}
+
+#radiusDiv {
+    position:fixed; 
+    top: calc(var(--top-space) + var(--v-space));
+}
+
+#attemptDiv {
+    position:fixed; 
+    top: calc(var(--top-space) + 2 * var(--v-space));
+}
+
+#buttonDiv {
+    position:fixed; 
+    top: calc(var(--top-space) + 3 * var(--v-space));
+}

@@ -7,8 +7,30 @@
     <title>Document</title>
 
     <script src="main.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body onload="setup()">
-    <canvas id="mainCanvas" width="400" height="400"></canvas>
+    <div id="mainDiv">
+        <canvas id="mainCanvas"></canvas>
+
+        <div id="menuDiv">
+            <div id="sizeDiv">
+                <b class="labelText">Size:</b>
+                <input id="sizeSlider" type="number">
+            </div>
+            <div id="radiusDiv">
+                <b class="labelText">Min radius:</b>
+                <input id="radiusSlider" type="number">
+            </div>
+            <div id="attemptDiv">
+                <b class="labelText">Attempts before rejection:</b>
+                <input id="attemptsSlider" type="number">
+            </div>
+            <div id="buttonDiv">
+                <button class = "button" id="genButton" type="button" onclick="OnGenButtonClick()">Generate</button>
+                <button class = "button" id="clearButton" type="button" disabled = "true" onclick="OnClearButtonClick()">Clear</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
