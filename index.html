@@ -16,15 +16,19 @@
         <div id="menuDiv">
             <div id="sizeDiv">
                 <b class="labelText">Size:</b>
-                <input id="sizeSlider" type="number">
+                <input class="textInput" id="sizeInput" type="number">
             </div>
             <div id="radiusDiv">
                 <b class="labelText">Min radius:</b>
-                <input id="radiusSlider" type="number">
+                <input class="textInput" id="radiusInput" type="number">
             </div>
             <div id="attemptDiv">
                 <b class="labelText">Attempts before rejection:</b>
-                <input id="attemptsSlider" type="number">
+                <input class="textInput" id="attemptsInput" type="number">
+            </div>
+            <div id="limitDiv">
+                <b class="labelText">Samples limit:</b>
+                <input class="textInput" id="limitInput" type="number">
             </div>
             <div id="buttonDiv">
                 <button class = "button" id="genButton" type="button" onclick="OnGenButtonClick()">Generate</button>

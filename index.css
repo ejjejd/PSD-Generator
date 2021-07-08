@@ -72,7 +72,12 @@ body {
     top: calc(var(--top-space) + 2 * var(--v-space));
 }
 
-#buttonDiv {
+#limitDiv {
     position:fixed; 
     top: calc(var(--top-space) + 3 * var(--v-space));
+}
+
+#buttonDiv {
+    position:fixed; 
+    top: calc(var(--top-space) + 4 * var(--v-space));
 }
