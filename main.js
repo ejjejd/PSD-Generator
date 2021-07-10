@@ -136,6 +136,40 @@ function createCanvas(size) {
     canvasCtx.fillRect(0, 0, size, size);
 }
 
+function modify(mode, value) {
+    var newValue = 0;
+
+    switch(mode) {
+    case 0: {
+        newValue = value;
+    }break;
+    case 1: {
+        newValue = value / canvasSize;
+    }break;
+    case 2: {
+        newValue = ((value / canvasSize) - 0.5) * 2;
+    }break;
+    }
+
+    return newValue
+}
+
+function printOutput() {
+    var m = updateOutputMode();
+
+    var div = document.getElementById('outputDiv');
+    div.innerHTML = '';
+
+    for(var i = 0; i < gridSize * gridSize; ++i) {
+        var e = grid[i];
+
+        if(!e)
+            continue;
+
+        div.innerHTML += `<p>${modify(m, e.x)}, ${modify(m, e.y)}</p>`;
+    }
+}
+
 function startUpdate() {
     updateFuncHandle = window.setInterval(draw, 16);
 
@@ -217,6 +251,21 @@ function updateValues() {
     gridSize = Math.floor(canvasSize / sampleSize);
 }
 
+function updateOutputMode() {
+    var radios = document.getElementsByName('output');
+
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked)
+            return i;
+    }
+
+    return 0;
+}
+
+function onOuputButtonClick() {
+    printOutput();
+}
+
 function OnGenButtonClick() {
     updateValues();
 
@@ -224,8 +273,5 @@ function OnGenButtonClick() {
 }
 
 function OnClearButtonClick() {
-    canvasCtx.fillStyle = 'black';
-    canvasCtx.fillRect(0, 0, canvasSize, canvasSize);
-
     stopUpdate();
 }

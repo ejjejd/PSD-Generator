@@ -32,9 +32,25 @@
             </div>
             <div id="buttonDiv">
                 <button class = "button" id="genButton" type="button" onclick="OnGenButtonClick()">Generate</button>
-                <button class = "button" id="clearButton" type="button" disabled = "true" onclick="OnClearButtonClick()">Clear</button>
+                <button class = "button" id="clearButton" type="button" disabled = "true" onclick="OnClearButtonClick()">Stop</button>
             </div>
         </div>
+    </div>
+    <div id="outputMenu">
+        <div>
+            <button class = "button" id="ouputButton" type="button" onclick="onOuputButtonClick()">Output</button>
+
+            <input type="radio" name = "output" id="absOuput" checked>
+            <label class="label" for="absOuput">Absolute</label>
+
+            <input type="radio" name = "output" id="normOuput">
+            <label class="label" for="normOuput">To [0, 1]</label>
+
+            <input type="radio" name = "output" id="norm2Ouput">
+            <label class="label" for="norm2Ouput">To [-1, 1]</label>
+        </div>
+    </div>
+    <div id="outputDiv">
     </div>
 </body>
 </html>

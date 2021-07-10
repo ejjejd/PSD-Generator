@@ -10,7 +10,12 @@ body {
 .labelText {
     font-size: 1.9vh;
     color:#ededed;
-    
+}
+
+.label {
+    font-size: 1.9vh;
+    color:#ededed;
+    position: relative;
 }
 
 .button {
@@ -53,8 +58,7 @@ body {
     height: 100%;
     width: 100%;
     display: inline-block;
-    position:fixed; 
-    left:45vh;
+    left:5vh;
 }
 
 #sizeDiv {
@@ -80,4 +84,22 @@ body {
 #buttonDiv {
     position:fixed; 
     top: calc(var(--top-space) + 4 * var(--v-space));
+}
+
+#outputMenu {
+    position: relative;
+    top: 4vh;
+}
+
+#outputDiv {
+    position: relative;
+    width: 40vh;
+    height: 48vh;
+    top: 5vh;
+    left: 0.1vh;
+    border: 1px solid black;
+    background-color: #2f3c4a;
+    color: #ededed;
+    overflow: auto;
+    text-align: center;
 }
