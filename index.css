@@ -58,7 +58,8 @@ body {
     height: 100%;
     width: 100%;
     display: inline-block;
-    left:5vh;
+    position: relative;
+    left: 4vh;
 }
 
 #sizeDiv {
